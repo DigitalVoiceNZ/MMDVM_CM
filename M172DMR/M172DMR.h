@@ -61,6 +61,7 @@ public:
 
 private:
 	std::string      m_callsign;
+	std::string      m_dmrCallsign;
 	std::string		 m_m17Ref;
 	CConf            m_conf;
 	CDMRNetwork*     m_dmrNetwork;

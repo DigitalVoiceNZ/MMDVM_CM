@@ -55,6 +55,7 @@ public:
   std::string  getURL() const;
   
   // The DMR Network section
+  std::string  getDMRCallsign() const;
   unsigned int getDMRId() const;
   std::string  getDMRXLXFile() const;
   std::string  getDMRXLXModule() const;
@@ -101,6 +102,7 @@ private:
   std::string  m_description;
   std::string  m_url;
   
+  std::string  m_dmrCallsign;
   unsigned int m_dmrId;
   std::string  m_dmrXLXFile;
   std::string  m_dmrXLXModule;

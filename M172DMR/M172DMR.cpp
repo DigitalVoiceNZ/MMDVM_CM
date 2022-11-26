@@ -133,6 +133,7 @@ int main(int argc, char** argv)
 
 CM172DMR::CM172DMR(const std::string& configFile) :
 m_callsign(),
+m_dmrCallsign(),
 m_m17Ref(),
 m_conf(configFile),
 m_dmrNetwork(NULL),
@@ -257,6 +258,7 @@ int CM172DMR::run()
 	LogInfo(HEADER4);
 
 	m_callsign = m_conf.getCallsign();
+	m_dmrCallsign = m_conf.getDMRCallsign();
 	m_m17Ref = m_conf.getM17DstName();
 	char module = m_m17Ref.c_str()[m_m17Ref.find(' ')+1];
 
@@ -806,7 +808,8 @@ bool CM172DMR::createDMRNetwork()
 	std::string url          = m_conf.getURL();
 
 	LogMessage("Info Parameters");
-	LogMessage("    Callsign: %s", m_callsign.c_str());
+	LogMessage("    M17 Callsign: %s", m_callsign.c_str());
+	LogMessage("    DMR Callsign: %s", m_dmrCallsign.c_str());
 	LogMessage("    RX Frequency: %uHz", rxFrequency);
 	LogMessage("    TX Frequency: %uHz", txFrequency);
 	LogMessage("    Power: %uW", power);
@@ -817,7 +820,7 @@ bool CM172DMR::createDMRNetwork()
 	LogMessage("    Description: \"%s\"", description.c_str());
 	LogMessage("    URL: \"%s\"", url.c_str());
 
-	m_dmrNetwork->setConfig(m_callsign, rxFrequency, txFrequency, power, m_colorcode, latitude, longitude, height, location, description, url);
+	m_dmrNetwork->setConfig(m_dmrCallsign, rxFrequency, txFrequency, power, m_colorcode, latitude, longitude, height, location, description, url);
 
 	bool ret = m_dmrNetwork->open();
 	if (!ret) {

@@ -55,6 +55,7 @@ m_height(0),
 m_location(),
 m_description(),
 m_url(),
+m_dmrCallsign(),
 m_dmrId(0U),
 m_dmrXLXFile(),
 m_dmrXLXModule(),
@@ -158,7 +159,9 @@ bool CConf::read()
 			else if (::strcmp(key, "URL") == 0)
 				m_url = value;
 		} else if (section == SECTION_DMR_NETWORK) {
-			if (::strcmp(key, "Id") == 0)
+			if (::strcmp(key, "Callsign") == 0)
+				m_dmrCallsign = value;
+			else if (::strcmp(key, "Id") == 0)
 				m_dmrId = (unsigned int)::atoi(value);
 			else if (::strcmp(key, "XLXFile") == 0)
 				m_dmrXLXFile = value;
@@ -229,6 +232,11 @@ bool CConf::read()
 	::fclose(fp);
 
 	return true;
+}
+
+std::string CConf::getDMRCallsign() const
+{
+	return m_dmrCallsign;
 }
 
 std::string CConf::getCallsign() const
